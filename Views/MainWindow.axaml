@@ -1,0 +1,103 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:InvoiceBuilder.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
+        x:Class="InvoiceBuilder.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="InvoiceBuilder">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <!-- TextBlock Text="Welcome to Invoice Builder" HorizontalAlignment="Center" VerticalAlignment="Center"/ -->
+
+<StackPanel>
+    <TextBlock Text="Customer Billing Details" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+    <Border BorderBrush="Black" BorderThickness="1" Padding="10">
+        <Grid>
+            <!-- Customer Details -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Text="Customer Phone Number:"/>
+                <TextBox Grid.Column="2" Text="{Binding CustomerPhoneNumber, Mode=TwoWay}" Width="200"/>
+                <Button Grid.Column="3" Content="Search" Command="{Binding RetrieveCustomerDetailsCommand}" HorizontalAlignment="Right" Margin="10,0,0,0"/>
+            </Grid>
+
+            <TextBlock Grid.Row="1" Text="Customer Name:"/>
+            <TextBox Grid.Row="1" Text="{Binding CustomerName, Mode=TwoWay}" Width="200"/>
+            
+            <TextBlock Grid.Row="2" Text="Address:"/>
+            <TextBox Grid.Row="2" Text="{Binding CustomerAddress, Mode=TwoWay}" Width="200"/>
+        </Grid>
+    </Border>
+
+    <!-- Company Details -->
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Text="Company Phone Number:"/>
+            <TextBox Grid.Column="2" Text="{Binding CompanyPhoneNumber, Mode=TwoWay}" Width="200"/>
+            <Button Grid.Column="3" Content="Search" Command="{Binding RetrieveCompanyDetailsCommand}" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        </Grid>
+
+        <TextBlock Grid.Row="1" Text="Company Name:"/>
+        <TextBox Grid.Row="1" Text="{Binding CompanyName, Mode=TwoWay}" Width="200"/>
+
+        <TextBlock Grid.Row="2" Text="Company Address:"/>
+        <TextBox Grid.Row="2" Text="{Binding CompanyAddress, Mode=TwoWay}" Width="200"/>
+    </Grid>
+
+    <StackPanel Margin="0,10,0,0">
+        <TextBlock Text="Item:"/>
+        <TextBox Text="{Binding ItemName, Mode=TwoWay}" Width="200"/>
+        <Button Content="Search" Command="{Binding RetrieveItemDetailsCommand}" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+    </StackPanel>
+
+
+        
+        <StackPanel Margin="0,10,0,0">
+            <TextBlock Text="ItemName:"/>
+            <TextBox Text="{Binding ItemName, Mode=TwoWay}" Width="200"/>
+        </StackPanel>
+        <!--StackPanel Margin="0,10,0,0">
+            <TextBlock Text="Invoice Amount:"/>
+            <TextBox Text="{Binding InvoiceAmount, Mode=TwoWay}" Width="200"/>
+        </StackPanel -->
+
+        <!--Button Content="Save Invoice" Command="{Binding SaveInvoice}" HorizontalAlignment="Center" Margin="0,20,0,0"/ -->
+
+        <TextBlock Text="{Binding GeneratedInvoice}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
+        <!-- New TextBlock for displaying the message -->
+        <TextBlock Text="{Binding SaveMessage}" HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold" Margin="0,10,0,0"/>
+
+
+
+    </StackPanel>
+
+</Window>
